@@ -16,8 +16,10 @@ def send_temp():
 @app.route('/get-temperature')
 def get_temp():
     temp = request.args.get('temperature')
+    vcc = request.args.get("vcc")
     date_time = datetime.datetime.now()
     current_date = datetime.date.today()
     current_time = date_time.strftime("%H:%M:%S")
     await requests.add_temp(current_date, current_time, temp)
-    print(f"Дата: {current_date}, время: {current_time}, температура: {temp}")
+    print(f"Дата: {current_date}, время: {current_time}, температура: {temp}, вольтаж: {vcc}В")
+#
