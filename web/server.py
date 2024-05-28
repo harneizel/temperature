@@ -8,10 +8,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET"]) # отправка текущей темпы на сайт
 def send_temp():
-    #curr_temp = asyncio.run(requests.get_temp())
-    curr_temp = 20
+    curr_temp = asyncio.run(requests.get_temp())
     print(f'ТЕКУЩАЯ ТЕМПЕРАТУРА {curr_temp}')
-
     return render_template('index.html', temp=curr_temp)
 
 

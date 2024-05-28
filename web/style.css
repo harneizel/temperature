@@ -1,0 +1,16 @@
+body {
+  font-family: 'Rubik', sans-serif;
+  color: #333;
+  background: #fff;
+}
+.container {
+  padding: 0 32px;
+}
+.app-h1 {
+  text-align: center;
+}
+.app-chart__canvas {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}

@@ -7,5 +7,34 @@
   <body>
     <p>Текущая тепература на 1 термометре: {{temp}}</p>
 
+    <div>
+      <canvas id="myChart" width=400 height=200></canvas>
+    </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [1,2,3,4,5],
+            datasets: [{
+                label: 'Температура',
+                data: [50,40,25,30,15],
+                backgroundColor: ['white'],
+                borderColor: ['#80d8ff'],
+                borderWidth: 4
+            }]
+        },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+                }
+            }
+        }
+    });
+   </script>
   </body>
 </html>
+
