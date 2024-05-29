@@ -11,10 +11,15 @@ async def get_temps():
         return result
 
 # добавляет температуру в базу данных
-async def add_temp(date, time, temp):
+async def add_temp(number, date, time, temp):
     async with async_session() as session:
         try:
-            temp = Temp1(date=date, time=time, temp=temp)
+            if number == 1:
+                temp = Temp1(date=date, time=time, temp=temp)
+            elif number == 2:
+                temp = Temp2(date=date, time=time, temp=temp)
+            elif number == 3:
+                temp = Temp3(date=date, time=time, temp=temp)
             session.add(temp)
             await session.commit()
         except SQLAlchemyError as e:

@@ -22,13 +22,14 @@ def send_temp():
 @app.route('/get-temperature', methods=['POST'])
 def get_temp():
     print(request.form)
+    sensor_number = int(request.form.get('sensor_number'))
     temp = request.form.get('temp')[:-1]
     vcc = request.form.get('vcc')
     date_time = datetime.datetime.now()
     current_date = datetime.date.today()
     current_time = date_time.strftime("%H:%M")
-    #await requests.add_temp(current_date, current_time, temp)
-    print(f"Дата: {current_date}, время: {current_time}, температура: {temp}, вольтаж: {vcc} В")
+    await requests.add_temp(sensor_number, current_date, current_time, temp)
+    print(f"Номер датчика: {sensor_number}, дата: {current_date}, время: {current_time}, температура: {temp}, вольтаж: {vcc} В")
     return "Data received successfully"
 
 @app.route('/get-datetime', methods=['GET', 'POST'])
