@@ -4,6 +4,7 @@ from sqlalchemy.sql.expression import func
 from database.models import async_session, Temp1, Temp2, Temp3
 
 
+
 async def get_temps():
     async with async_session() as session:
         result = await session.scalars(select(Temp1))
@@ -23,8 +24,11 @@ async def add_temp(date, time, temp):
 # забирает последнюю добавленную температуру из базы данных
 async def get_temp():
     async with async_session() as session:
+        result = []
         max_id = await session.scalar(func.max(Temp1.id)) #Temp1.date, Temp1.time,
-        result = await session.scalar(select(Temp1.temp).where(Temp1.id == max_id))
+        result.append((await session.execute(select(Temp1.date, Temp1.time).where(Temp1.id == 1))).one()) #дата время когда темпа начачла собираться
+        result.append((await session.execute(select(Temp1.date, Temp1.time).where(Temp1.id == max_id))).one())
+        result.append(await session.scalar(select(Temp1.temp).where(Temp1.id == max_id))) #последняя собранная темпа
         return result
 
 
