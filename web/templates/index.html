@@ -3,23 +3,36 @@
   <head>
    <meta charset="UTF-8">
    <title>Temperature</title>
+   <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <p>Текущая тепература на 1 термометре:</p>
-    <h3>{{temp}}</h3>
-    <p>Вы можете построить график температура/время, для этого введите начальную и конечные дату и время</p>
-    <form action="/get-datetime" method="post">
-      <p>Введите начальные данные: дата <input type="date" name="first_date">
-      время <input type="time" name = "first_time"></p>
-      <p>Введите конечные данные: дата <input type="date" name="second_date">
-      время <input type="time" name="second_time"></p>
-      <p><input type="submit" value="Сгенерировать">
-      <input type="reset" value="Очистить поля"></p>
-    </form>
-
-    <p>Доступные промежутки для анализа температуры:
-    {{date1}}, {{time1}} - {{date2}}, {{time2}}
-    </p>
+    <center>
+        <div class="wrap">
+        <div class="temp">
+            <p>Текущая тепература на 1 термометре:</p>
+            <h3>{{temp1}}</h3>
+         </div>
+        <div class="temp">
+            <p>Текущая тепература на 2 термометре:</p>
+            <h3>{{temp2}}</h3>
+        </div>
+        <div class="temp">
+            <p>Текущая тепература на 3 термометре:</p>
+            <h3>{{temp3}}</h3>
+        </div>
+        </div>
+        <p>Вы можете построить график температура/время, для этого введите начальную и конечные дату и время</p>
+        <form action="/get-datetime" method="post">
+          <p>Введите начальные данные: дата <input type="date" name="first_date">
+          время <input type="time" name = "first_time"></p>
+          <p>Введите конечные данные: дата <input type="date" name="second_date">
+          время <input type="time" name="second_time"></p>
+          <p><input type="submit" value="Сгенерировать">
+          <input type="reset" value="Очистить поля"></p>
+        <p>Доступные промежутки для анализа температуры:
+        {{date1}}, {{time1}}  -  {{date2}}, {{time2}}
+        </p>
+    </center>
   </body>
 </html>
 

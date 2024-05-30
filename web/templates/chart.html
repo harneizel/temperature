@@ -2,11 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>График температуры</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div>
-      <canvas id="myChart" width=400 height=200></canvas>
+        <center>
+            <p>Текущая тепература на 1 термометре:</p>
+            <h3>{{temp}}</h3>
+            <p>Вы можете построить график температура/время, для этого введите начальную и конечные дату и время</p>
+            <form action="/get-datetime" method="post">
+                <p>Введите начальные данные: дата <input type="date" name="first_date">
+                время <input type="time" name = "first_time"></p>
+                <p>Введите конечные данные: дата <input type="date" name="second_date">
+                время <input type="time" name="second_time"></p>
+                <p><input type="submit" value="Сгенерировать">
+                <input type="reset" value="Очистить поля"></p>
+                <p>Доступные промежутки для анализа температуры:
+                {{date1}}, {{time1}}  -  {{date2}}, {{time2}}</p>
+        </center>
+    </div>
+
+    <div style="position:fixed; left: 50%; top: 65%; transform: translate(-50%, -50%);">
+        <canvas id="myChart" width="900%"></canvas>
     </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

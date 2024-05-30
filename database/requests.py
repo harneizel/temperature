@@ -30,8 +30,9 @@ async def add_temp(number, date, time, temp):
 async def get_temp():
     async with async_session() as session:
         result = []
+        min_id = await session.scalar(func.min(Temp1.id))
         max_id = await session.scalar(func.max(Temp1.id)) #Temp1.date, Temp1.time,
-        result.append((await session.execute(select(Temp1.date, Temp1.time).where(Temp1.id == 1))).one()) #дата время когда темпа начачла собираться
+        result.append((await session.execute(select(Temp1.date, Temp1.time).where(Temp1.id == min_id))).one()) #дата время когда темпа начачла собираться
         result.append((await session.execute(select(Temp1.date, Temp1.time).where(Temp1.id == max_id))).one())
         result.append(await session.scalar(select(Temp1.temp).where(Temp1.id == max_id))) #последняя собранная темпа
         return result

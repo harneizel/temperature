@@ -49,8 +49,9 @@ void setup() {
 void loop() {
 //if (millis()> Time1 + 300000) Time1 = millis(), narodmonSend ();       // выполняем функцию narodmonSend каждые 10 сек для   теста
   temmperatureSend();
-  Serial.println("Засыпаем на 30 секунд");
-  ESP.deepSleep(0.5*1000000);          // спать на 10 минут пины D16 и  RST должны быть соеденены между собой
+  Serial.println("Засыпаем на 1 минуту");
+  delay(60*1000);
+  //ESP.deepSleep(1*1000000);          // спать на 10 минут пины D16 и  RST должны быть соеденены между собой
   } 
 
 
