@@ -6,47 +6,46 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <center>
-            <p>Текущая тепература на 1 термометре:</p>
-            <h3>{{temp}}</h3>
-            <p>Вы можете построить график температура/время, для этого введите начальную и конечные дату и время</p>
-            <form action="/get-datetime" method="post">
-                <p>Введите начальные данные: дата <input type="date" name="first_date">
-                время <input type="time" name = "first_time"></p>
-                <p>Введите конечные данные: дата <input type="date" name="second_date">
-                время <input type="time" name="second_time"></p>
-                <p><input type="submit" value="Сгенерировать">
-                <input type="reset" value="Очистить поля"></p>
-                <p>Доступные промежутки для анализа температуры:
-                {{date1}}, {{time1}}  -  {{date2}}, {{time2}}</p>
-        </center>
-    </div>
-
-    <div style="position:fixed; left: 50%; top: 65%; transform: translate(-50%, -50%);">
+    <center>
+    <div class="chart">
         <canvas id="myChart" width="900%"></canvas>
     </div>
+    </center>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
     const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: [1,2,3,4,5],
             datasets: [{
-                label: 'Температура',
+                label: 'Датчик 1',
                 data: [50,40,25,30,15],
                 backgroundColor: ['white'],
-                borderColor: ['#80d8ff'],
+                borderColor: 'red',
+                borderWidth: 4
+            }, {
+                label: 'Датчик 2',
+                data: [20,30,16,10,20],
+                backgroundColor: ['white'],
+                borderColor: 'green',
+                borderWidth: 4
+            }, {
+                label: 'Датчик 3',
+                data: [40,15,10,25,30],
+                backgroundColor: ['white'],
+                borderColor: 'blue',
                 borderWidth: 4
             }]
         },
         options: {
-        scales: {
-            y: {
-                beginAtZero: true
-                }
+            scales: {
+                yAxes: [{
+                    ticks:{
+                    beginAtZero: true
+                    }
+                }]
             }
         }
     });

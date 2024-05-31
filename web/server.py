@@ -8,12 +8,12 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET"]) # отправка текущей темпы на сайт
 def send_temp():
-    result = asyncio.run(requests.get_temp())
-    print(result)
-    date1, time1, date2, time2 = result[0][0], result[0][1], result[1][0], result[1][1]
-    curr_temp = result[2]
-    print(f'Запрос текщей температуры: {curr_temp}')
-    return render_template('index.html', temp=curr_temp, date1=date1, date2=date2, time1=time1, time2=time2)
+    data = asyncio.run(requests.get_data())
+    print(data)
+    date1, date2 = data['datetime1'], data['datetime2']
+    temp1, temp2, temp3 = data['temp1'], data['temp2'], data['temp3']
+    print(f'Запрос текщей температуры: {temp1, temp2, temp3}')
+    return render_template('index.html', temp1=temp1, temp2=temp2, temp3=temp3, date1=date1, date2=date2)
 
 # обработка темпы от датчика
 @app.route('/get-temperature', methods=['POST'])
@@ -31,9 +31,15 @@ def get_temp():
 
 @app.route('/get-datetime', methods=['GET', 'POST'])
 def get_datetime():
-    data = request.form
-    first_date, first_time, second_date, second_time = data['first_date'], data['first_time'], data['second_date'], data['second_time']
-    result = asyncio.run(requests.get_temp())
-    date1, time1, date2, time2 = result[0][0], result[0][1], result[1][0], result[1][1]
-    curr_temp = result[2]
-    return render_template('chart.html', temp=curr_temp, date1=date1, date2=date2, time1=time1, time2=time2)
+    cl_data = request.form #получение client data, то что клиент ввел на сайте
+    data = asyncio.run(requests.get_data()) # данные из базы данных
+    print(f"Данные клиента: {cl_data}")
+    print(f"Данные из бд: {data}")
+    first_date, first_time, second_date, second_time = cl_data['first_date'], cl_data['first_time'], cl_data['second_date'], cl_data['second_time']
+    if first_date or first_time or second_date or second_time == None:
+        print(first_date,first_time,second_date,second_time)
+        return "вы заполнили не все поля"
+    date1, date2 = data['datetime1'], data['datetime2']
+    temp1, temp2, temp3 = data['temp1'], data['temp2'], data['temp3']
+
+    return render_template('chart.html', temp1=temp1, temp2=temp2, temp3=temp3, date1=date1, date2=date2)
