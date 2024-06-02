@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-  <head>
-   <meta charset="UTF-8">
-   <title>Температура</title>
-   <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+    <head>
+    <meta charset="UTF-8">
+    <title>Температура</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
     <center>
-        <div class="wrap">
         <div class="temp">
-            <p>Текущая тепература на 1 термометре:</p>
-            <h3>{{temp1}}</h3>
-         </div>
-        <div class="temp">
-            <p>Текущая тепература на 2 термометре:</p>
-            <h3>{{temp2}}</h3>
+            <p>Текущая тепература на 1 датчике:</p>
+            <b>{{temp1}}</b>
         </div>
         <div class="temp">
-            <p>Текущая тепература на 3 термометре:</p>
-            <h3>{{temp3}}</h3>
+            <p>Текущая тепература на 2 датчике:</p>
+            <b>{{temp2}}</b>
         </div>
+        <div class="temp">
+            <p>Текущая тепература на 3 датчике:</p>
+            <b>{{temp3}}</b>
         </div>
         <p>Вы можете построить график температура/время, для этого введите начальную и конечные дату и время</p>
         <form action="/get-datetime" method="post">
-          <p>Введите начальные данные: дата <input type="date" name="first_date">
-          время <input type="time" name = "first_time"></p>
-          <p>Введите конечные данные: дата <input type="date" name="second_date">
-          время <input type="time" name="second_time"></p>
-          <p><input type="submit" value="Сгенерировать">
-          <input type="reset" value="Очистить поля"></p>
-        <p>Доступные промежутки для анализа температуры:
-        {{date1}}  -  {{date2}}
-        </p>
+            <p> <input type="radio" name="sensor" value="all_sensors" onclick="get_all_sensors()" checked>Все датчики
+                <input type="radio" name="sensor" value="Temp1" onclick="get_1_sensor()">Первый датчик
+                <input type="radio" name="sensor" value="Temp2">Второй датчик
+                <input type="radio" name="sensor" value="Temp3">Третий датчик</p>
+
+
+            <p>Введите начальные данные: дата <input type="date" name="first_date">
+            время <input type="time" name = "first_time"></p>
+
+            <p>Введите конечные данные: дата <input type="date" name="second_date">
+            время <input type="time" name="second_time"></p>
+
+            <p><input type="submit" value="Сгенерировать">
+            <input type="reset" value="Очистить поля"></p>
+
+            <p>Доступные промежутки для анализа температуры:
+            {{date1}}  -  {{date2}}</p>
     </center>
-  </body>
+    <script>
+        function get_all_sensors() {
+        alert("radio changed")
+        }
+    </script>
+    </body>
 </html>
 

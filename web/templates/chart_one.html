@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>График температуры</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <center>
+    <div class="chart">
+        <canvas id="myChart"></canvas>
+    </div>
+    </center>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ctx = document.getElementById('myChart');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ dtime|tojson }},
+            datasets: [{
+                label: 'Датчик №{{n}}',
+                data: {{temp|tojson}},
+                backgroundColor: ['white'],
+                borderColor: 'red',
+                borderWidth: 4
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks:{
+                    beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+   </script>
+  </body>
+</html>

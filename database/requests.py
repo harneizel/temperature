@@ -5,10 +5,37 @@ from database.models import async_session, Temp1, Temp2, Temp3
 import datetime
 
 
-async def get_temps():
+async def get_temps(sensor_number, date1, time1, date2, time2):
     async with async_session() as session:
-        result = await session.scalars(select(Temp1))
-        return result
+        if sensor_number=='Temp1':
+            table=Temp1
+        elif sensor_number=='Temp2':
+            table=Temp2
+        elif sensor_number=='Temp3':
+            table=Temp3
+        def datetime_format(res): #форматирует дату и время чтобы можно было сравнивать
+            print(res)
+            dt = datetime.datetime(int(res[0][0:4]), int(res[0][5:7]), int(res[0][8:]),
+                                   int(res[1][0:2]), int(res[1][3:]))
+            return dt
+
+
+        dt1=datetime_format((date1, time1,))
+        dt2=datetime_format((date2, time2,))
+        result_date = []
+        result_time = []
+        result_temp = []
+        all_data = (await session.execute(select(table.date,  table.time, table.temp))).all()
+        for res in all_data:
+            if dt1<=datetime_format(res)<=dt2:
+                result_date.append(res[0])
+                result_time.append(res[1])
+                result_temp.append(res[2])
+                print(res)
+
+        print(f"Значения по датчику {sensor_number} в диапазоне {date1} {time1}  -  {date2} {time1}"
+              f" Дата {result_date}, время {result_time}, температура {result_temp}")
+        return result_date, result_time, result_temp
 
 # добавляет температуру в базу данных
 async def add_temp(number, date, time, temp):

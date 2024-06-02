@@ -1,5 +1,4 @@
 import asyncio
-from collector import get_temp
 from database.models import on_startup_database
 from web.server import app
 from threading import Thread
