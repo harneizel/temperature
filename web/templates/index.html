@@ -7,31 +7,46 @@
     </head>
     <body>
     <center>
+        <h1>Последние зарегестрированные температуры на датчиках</h1>
+        <div class="container">
         <div class="temp">
-            <p>Текущая тепература на 1 датчике:</p>
+            <p>1 датчик</p>
             <b>{{temp1}}</b>
         </div>
         <div class="temp">
-            <p>Текущая тепература на 2 датчике:</p>
+            <p>2 датчик</p>
             <b>{{temp2}}</b>
         </div>
         <div class="temp">
-            <p>Текущая тепература на 3 датчике:</p>
+            <p>3 датчик:</p>
             <b>{{temp3}}</b>
         </div>
-        <p>Вы можете построить график температура/время, для этого введите начальную и конечные дату и время</p>
+        </div>
+        <div class="chart_built">
+            <p>Чтобы построить график введите начальную и конечную дату и время</p>
+        </div>
         <form action="/get-datetime" method="post">
-            <p> <input type="radio" name="sensor" value="all_sensors" onclick="get_all_sensors()" checked>Все датчики
-                <input type="radio" name="sensor" value="Temp1" onclick="get_1_sensor()">Первый датчик
-                <input type="radio" name="sensor" value="Temp2">Второй датчик
-                <input type="radio" name="sensor" value="Temp3">Третий датчик</p>
+            <div class="radio_group">
+                <label>
+                    <input type="radio" name="sensor" value="all_sensors" onclick="get_all_sensors()" checked>Все датчики
+                </label>
+                <label>
+                    <input type="radio" name="sensor" value="Temp1" onclick="get_1_sensor()">Первый датчик
+                </label>
+                <label>
+                    <input type="radio" name="sensor" value="Temp2">Второй датчик
+                </label>
+                <label>
+                    <input type="radio" name="sensor" value="Temp3">Третий датчик
+                </label>
+            </div>
 
 
-            <p>Введите начальные данные: дата <input type="date" name="first_date">
-            время <input type="time" name = "first_time"></p>
+            <label>Введите начальные данные: дата <input type="date" name="first_date">
+            время <input type="time" name = "first_time"></label>
 
-            <p>Введите конечные данные: дата <input type="date" name="second_date">
-            время <input type="time" name="second_time"></p>
+            <label>Введите конечные данные: дата <input type="date" name="second_date">
+            время <input type="time" name="second_time"></label>
 
             <p><input type="submit" value="Сгенерировать">
             <input type="reset" value="Очистить поля"></p>
