@@ -6,6 +6,6 @@ from threading import Thread
 if __name__ == '__main__':
     try:
         asyncio.run(on_startup_database()) #подключение к бд
-        app.run(host='192.168.254.184',port=5000, debug=True) # запуск сайта
+        app.run(host="0.0.0.0", port=5000, debug=True) # запуск сайта #192.168.254.184
     except:
         print("Завершение работы")
